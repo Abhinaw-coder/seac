@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Zap, Calendar, MapPin, Trophy, Users, Sparkles, ArrowRight } from 'lucide-react';
+import EventDetailModal from './EventDetailModal';
 
 const Technozian: React.FC = () => {
+  const [selectedEvent, setSelectedEvent] = useState<any | null>(null);
   const technozianEvents = [
     {
       id: 't1',
@@ -54,7 +56,7 @@ const Technozian: React.FC = () => {
   ];
 
   return (
-    <section id="technozian" className="py-20 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 relative overflow-hidden">
+    <section id="technozian" className="py-20 bg-gradient-to-br from-blue-50 via-cyan-50 to-blue-100 dark:from-slate-950 dark:via-blue-950 dark:to-slate-950 relative overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -72,7 +74,7 @@ const Technozian: React.FC = () => {
           </div>
 
           <div className="relative inline-block mb-6">
-            <h2 className="text-6xl md:text-9xl font-black tracking-wider relative techno-title">
+            <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-black tracking-wider relative techno-title">
               <span className="relative inline-block">
                 {'TECHNOZIAN'.split('').map((letter, index) => (
                   <span
@@ -90,30 +92,30 @@ const Technozian: React.FC = () => {
             <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 opacity-30 blur-2xl -z-10 animate-pulse-slow"></div>
           </div>
 
-          <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
-            Our college's most <span className="text-cyan-400 font-bold">energetic</span> and <span className="text-blue-400 font-bold">electrifying</span> tech festival
+          <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
+            Our college's most <span className="text-cyan-600 dark:text-cyan-400 font-bold">energetic</span> and <span className="text-blue-600 dark:text-blue-400 font-bold">electrifying</span> tech festival
           </p>
 
           <div className="flex flex-wrap justify-center gap-8 mb-12">
             <div className="flex items-center gap-3">
-              <Calendar className="h-6 w-6 text-cyan-400" />
+              <Calendar className="h-6 w-6 text-cyan-600 dark:text-cyan-400" />
               <div className="text-left">
-                <div className="text-sm text-gray-400">Event Date</div>
-                <div className="text-lg font-bold text-white">March 15-17, 2026</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Event Date</div>
+                <div className="text-lg font-bold text-gray-900 dark:text-white">March 15-17, 2026</div>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <Users className="h-6 w-6 text-blue-400" />
+              <Users className="h-6 w-6 text-blue-600 dark:text-blue-400" />
               <div className="text-left">
-                <div className="text-sm text-gray-400">Expected Participants</div>
-                <div className="text-lg font-bold text-white">5000+ Students</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Expected Participants</div>
+                <div className="text-lg font-bold text-gray-900 dark:text-white">5000+ Students</div>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <Trophy className="h-6 w-6 text-yellow-400" />
+              <Trophy className="h-6 w-6 text-yellow-600 dark:text-yellow-400" />
               <div className="text-left">
-                <div className="text-sm text-gray-400">Total Prize Pool</div>
-                <div className="text-lg font-bold text-white">₹5,00,000+</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Total Prize Pool</div>
+                <div className="text-lg font-bold text-gray-900 dark:text-white">₹5,00,000+</div>
               </div>
             </div>
           </div>
@@ -122,25 +124,25 @@ const Technozian: React.FC = () => {
         {/* Main Poster/Banner */}
         <div className="mb-16 relative group">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-500"></div>
-          <div className="relative bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl overflow-hidden border border-blue-500/30 shadow-2xl">
+          <div className="relative bg-gradient-to-br from-white to-blue-50 dark:from-slate-900 dark:to-slate-800 rounded-3xl overflow-hidden border border-blue-200 dark:border-blue-500/30 shadow-2xl">
             <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-40"></div>
 
             <div className="relative p-12 md:p-16">
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 <div>
-                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-500/20 border border-cyan-500/30 rounded-full mb-6">
-                    <Sparkles className="h-4 w-4 text-cyan-400" />
-                    <span className="text-cyan-400 text-sm font-semibold">FLAGSHIP EVENT</span>
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-100 dark:bg-cyan-500/20 border border-cyan-300 dark:border-cyan-500/30 rounded-full mb-6">
+                    <Sparkles className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
+                    <span className="text-cyan-700 dark:text-cyan-400 text-sm font-semibold">FLAGSHIP EVENT</span>
                   </div>
 
-                  <h3 className="text-4xl md:text-5xl font-black text-white mb-4 leading-tight">
+                  <h3 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-4 leading-tight">
                     Innovation Meets
-                    <span className="block text-transparent bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text">
+                    <span className="block text-transparent bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text">
                       Inspiration
                     </span>
                   </h3>
 
-                  <p className="text-gray-300 text-lg leading-relaxed mb-8">
+                  <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed mb-8">
                     Three days of non-stop innovation, competition, and celebration. Experience cutting-edge technology,
                     compete in thrilling challenges, and network with industry leaders.
                   </p>
@@ -175,15 +177,15 @@ const Technozian: React.FC = () => {
 
         {/* Events Grid */}
         <div>
-          <h3 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
-            Featured <span className="text-cyan-400">Events</span>
+          <h3 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white text-center mb-12">
+            Featured <span className="text-cyan-600 dark:text-cyan-400">Events</span>
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {technozianEvents.map((event, index) => (
               <div
                 key={event.id}
-                className="group relative bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-6 border border-slate-700 hover:border-cyan-500/50 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/20"
+                className="group relative bg-white dark:bg-gradient-to-br dark:from-slate-900 dark:to-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 hover:border-cyan-500/50 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/20"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-600/0 to-cyan-600/0 group-hover:from-blue-600/5 group-hover:to-cyan-600/5 rounded-2xl transition-all duration-500"></div>
@@ -191,25 +193,38 @@ const Technozian: React.FC = () => {
                 <div className="relative">
                   <div className="flex items-start justify-between mb-4">
                     <div className="text-5xl">{event.icon}</div>
-                    <span className="px-3 py-1 bg-blue-500/20 border border-blue-500/30 text-blue-400 text-xs font-semibold rounded-full">
+                    <span className="px-3 py-1 bg-blue-100 dark:bg-blue-500/20 border border-blue-300 dark:border-blue-500/30 text-blue-700 dark:text-blue-400 text-xs font-semibold rounded-full">
                       {event.category}
                     </span>
                   </div>
 
-                  <h4 className="text-2xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
+                  <h4 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
                     {event.title}
                   </h4>
 
-                  <p className="text-gray-400 leading-relaxed mb-4">
+                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
                     {event.description}
                   </p>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-slate-700">
+                  <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-slate-700">
                     <div className="flex items-center gap-2">
-                      <Trophy className="h-5 w-5 text-yellow-400" />
-                      <span className="text-white font-bold">{event.prize}</span>
+                      <Trophy className="h-5 w-5 text-yellow-600 dark:text-yellow-400" />
+                      <span className="text-gray-900 dark:text-white font-bold">{event.prize}</span>
                     </div>
-                    <button className="text-cyan-400 font-semibold hover:text-cyan-300 transition-colors flex items-center gap-1 group/arrow">
+                    <button
+                      onClick={() => setSelectedEvent({
+                        ...event,
+                        date: '2026-03-15',
+                        time: '10:00 AM',
+                        location: 'Main Campus - Event Hall',
+                        description: event.description,
+                        longDescription: event.description + ' Join us for an exciting experience with hands-on activities, expert guidance, and amazing prizes!',
+                        members: ['Tech Team Lead', 'Event Coordinator', 'Volunteer Staff'],
+                        poc: 'Event Manager',
+                        formLink: 'https://forms.google.com/technozian-registration',
+                      })}
+                      className="text-cyan-600 dark:text-cyan-400 font-semibold hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors flex items-center gap-1 group/arrow"
+                    >
                       Learn More
                       <ArrowRight className="h-4 w-4 group-hover/arrow:translate-x-1 transition-transform" />
                     </button>
@@ -315,6 +330,18 @@ const Technozian: React.FC = () => {
         .techno-letter:nth-child(9) { animation-delay: 0.8s; }
         .techno-letter:nth-child(10) { animation-delay: 0.9s; }
       `}</style>
+
+      <EventDetailModal
+        isOpen={!!selectedEvent}
+        onClose={() => setSelectedEvent(null)}
+        event={selectedEvent || {
+          title: '',
+          description: '',
+          date: '',
+          time: '',
+          location: '',
+        }}
+      />
     </section>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Calendar, MapPin, Clock, ChevronRight, Users, User } from 'lucide-react';
+import EventDetailModal from './EventDetailModal';
 
 interface Event {
   id: string;
@@ -18,6 +19,7 @@ interface Event {
 const Events: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'upcoming' | 'past'>('upcoming');
   const [countdowns, setCountdowns] = useState<Record<string, { days: number; hours: number; minutes: number; seconds: number }>>({});
+  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
 
   const eventsData: Event[] = [
     {
@@ -229,7 +231,10 @@ const Events: React.FC = () => {
                     )}
                   </div>
 
-                  <button className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-300 group/btn">
+                  <button
+                    onClick={() => setSelectedEvent(event)}
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-300 group/btn"
+                  >
                     Learn More
                     <ChevronRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
                   </button>
@@ -251,6 +256,18 @@ const Events: React.FC = () => {
           )}
         </div>
       </div>
+
+      <EventDetailModal
+        isOpen={!!selectedEvent}
+        onClose={() => setSelectedEvent(null)}
+        event={selectedEvent || {
+          title: '',
+          description: '',
+          date: '',
+          time: '',
+          location: '',
+        }}
+      />
     </section>
   );
 };

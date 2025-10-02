@@ -72,12 +72,12 @@ const Activities: React.FC = () => {
   ];
 
   return (
-    <section id="activities" ref={sectionRef} className="py-12 md:py-20 bg-gray-50 dark:bg-gray-800">
+    <section id="activities" ref={sectionRef} className="py-12 md:py-20 bg-white dark:bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 md:mb-6">
-            Club <span className="text-blue-600 dark:text-blue-400">Activities</span>
+            Our <span className="text-blue-600 dark:text-blue-400">Core Values</span>
           </h2>
           <p className="text-base md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto px-4">
             Discover the exciting world of satellite communication and electronics through our diverse

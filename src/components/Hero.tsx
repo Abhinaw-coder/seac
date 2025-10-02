@@ -70,7 +70,7 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section id="home" ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden py-20 md:py-0">
+    <section id="home" ref={heroRef} className="relative min-h-[100svh] md:min-h-screen flex items-center justify-center overflow-hidden py-16 md:py-0">
       {/* Background with parallax */}
       <div className="hero-bg-layer absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
         <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/2159/flight-sky-earth-space.jpg?auto=compress&cs=tinysrgb&w=1920')] bg-cover bg-center opacity-25"></div>
@@ -98,7 +98,7 @@ const Hero: React.FC = () => {
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h1
           ref={titleRef}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white mb-6 md:mb-8 leading-tight tracking-tight"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white mb-4 md:mb-8 leading-tight tracking-tight px-2"
           style={{ fontFamily: "'Space Grotesk', sans-serif" }}
         >
           <span className="inline-block">Satellite & Electronics</span>
@@ -109,52 +109,52 @@ const Hero: React.FC = () => {
 
         <p
           ref={subtitleRef}
-          className="mt-6 md:mt-10 text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-8 md:mb-14 max-w-4xl mx-auto leading-relaxed font-light px-4"
+          className="mt-4 md:mt-8 text-sm sm:text-base md:text-lg lg:text-xl text-gray-200 mb-6 md:mb-12 max-w-4xl mx-auto leading-relaxed font-light px-4"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
           Exploring the frontiers of space communication and electronics.
-          <span className="block mt-2 md:mt-3 text-blue-200">Join our community of innovators, experimenters, and technology enthusiasts.</span>
+          <span className="block mt-2 text-blue-200">Join our community of innovators, experimenters, and technology enthusiasts.</span>
         </p>
 
         <button
           ref={ctaRef}
           onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
-          className="inline-flex items-center px-8 py-4 md:px-12 md:py-6 bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-base md:text-xl font-bold rounded-full hover:from-blue-700 hover:to-cyan-700 transition-all duration-500 transform hover:scale-105 md:hover:scale-110 hover:shadow-2xl shadow-blue-500/50 hover:shadow-cyan-500/60 group relative overflow-hidden"
+          className="inline-flex items-center px-6 py-3 md:px-10 md:py-5 bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-sm md:text-lg font-bold rounded-full hover:from-blue-700 hover:to-cyan-700 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl shadow-blue-500/50 hover:shadow-cyan-500/60 group relative overflow-hidden"
           style={{ fontFamily: "'Space Grotesk', sans-serif" }}
         >
           <span className="relative z-10">Start Your Journey</span>
-          <ArrowRight className="ml-2 md:ml-3 h-5 w-5 md:h-6 md:w-6 transform group-hover:translate-x-2 transition-transform duration-300 relative z-10" />
+          <ArrowRight className="ml-2 h-5 w-5 transform group-hover:translate-x-2 transition-transform duration-300 relative z-10" />
           <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
         </button>
 
         {/* Stats */}
-        <div ref={statsRef} className="mt-12 md:mt-24 grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 lg:gap-12 max-w-6xl mx-auto px-4">
-          <div className="stat-card bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-2xl md:rounded-3xl p-6 md:p-10 shadow-2xl hover:shadow-cyan-500/20 hover:border-cyan-400/40 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 group">
+        <div ref={statsRef} className="mt-8 md:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-8 max-w-6xl mx-auto px-4">
+          <div className="stat-card bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-xl md:rounded-2xl p-4 md:p-8 shadow-2xl hover:shadow-cyan-500/20 hover:border-cyan-400/40 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 group">
             <div
-              className="text-4xl md:text-5xl lg:text-6xl font-black bg-gradient-to-br from-cyan-400 via-blue-400 to-cyan-500 bg-clip-text text-transparent mb-3 md:mb-4 group-hover:scale-110 transition-transform duration-500"
+              className="text-3xl md:text-4xl lg:text-5xl font-black bg-gradient-to-br from-cyan-400 via-blue-400 to-cyan-500 bg-clip-text text-transparent mb-2 md:mb-3 group-hover:scale-110 transition-transform duration-500"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
               500+
             </div>
-            <div className="text-gray-200 text-base md:text-lg font-semibold" style={{ fontFamily: "'Inter', sans-serif" }}>Active Members</div>
+            <div className="text-gray-200 text-sm md:text-base font-semibold" style={{ fontFamily: "'Inter', sans-serif" }}>Active Members</div>
           </div>
-          <div className="stat-card bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-2xl md:rounded-3xl p-6 md:p-10 shadow-2xl hover:shadow-blue-500/20 hover:border-blue-400/40 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 group">
+          <div className="stat-card bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-xl md:rounded-2xl p-4 md:p-8 shadow-2xl hover:shadow-blue-500/20 hover:border-blue-400/40 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 group">
             <div
-              className="text-4xl md:text-5xl lg:text-6xl font-black bg-gradient-to-br from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent mb-3 md:mb-4 group-hover:scale-110 transition-transform duration-500"
+              className="text-3xl md:text-4xl lg:text-5xl font-black bg-gradient-to-br from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2 md:mb-3 group-hover:scale-110 transition-transform duration-500"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
               50+
             </div>
-            <div className="text-gray-200 text-base md:text-lg font-semibold" style={{ fontFamily: "'Inter', sans-serif" }}>Projects Completed</div>
+            <div className="text-gray-200 text-sm md:text-base font-semibold" style={{ fontFamily: "'Inter', sans-serif" }}>Projects Completed</div>
           </div>
-          <div className="stat-card bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-2xl md:rounded-3xl p-6 md:p-10 shadow-2xl hover:shadow-cyan-500/20 hover:border-cyan-400/40 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 group">
+          <div className="stat-card bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-xl md:rounded-2xl p-4 md:p-8 shadow-2xl hover:shadow-cyan-500/20 hover:border-cyan-400/40 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 group">
             <div
-              className="text-4xl md:text-5xl lg:text-6xl font-black bg-gradient-to-br from-cyan-400 via-blue-400 to-cyan-500 bg-clip-text text-transparent mb-3 md:mb-4 group-hover:scale-110 transition-transform duration-500"
+              className="text-3xl md:text-4xl lg:text-5xl font-black bg-gradient-to-br from-cyan-400 via-blue-400 to-cyan-500 bg-clip-text text-transparent mb-2 md:mb-3 group-hover:scale-110 transition-transform duration-500"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
               15
             </div>
-            <div className="text-gray-200 text-base md:text-lg font-semibold" style={{ fontFamily: "'Inter', sans-serif" }}>Years of Excellence</div>
+            <div className="text-gray-200 text-sm md:text-base font-semibold" style={{ fontFamily: "'Inter', sans-serif" }}>Years of Excellence</div>
           </div>
         </div>
       </div>

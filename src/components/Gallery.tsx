@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { X, ZoomIn } from 'lucide-react';
+import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -82,9 +82,21 @@ const dummyImages = [
 
 const Gallery: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const [selectedImage, setSelectedImage] = useState<any>(null);
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [showAll, setShowAll] = useState<boolean>(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const categories = [
     { id: 'all', name: 'All', count: dummyImages.length },
@@ -112,6 +124,26 @@ const Gallery: React.FC = () => {
     return () => ctx.revert();
   }, [activeCategory]);
 
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % filteredImages.length);
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, [isMobile, activeCategory]);
+
+  useEffect(() => {
+    if (scrollRef.current && isMobile) {
+      const cardWidth = scrollRef.current.offsetWidth;
+      scrollRef.current.scrollTo({
+        left: currentIndex * cardWidth,
+        behavior: 'smooth',
+      });
+    }
+  }, [currentIndex, isMobile]);
+
   const filteredImages = activeCategory === 'all'
     ? dummyImages
     : dummyImages.filter(img => img.category === activeCategory);
@@ -126,6 +158,14 @@ const Gallery: React.FC = () => {
   const handleCloseLightbox = () => {
     setSelectedImage(null);
     document.body.style.overflow = 'auto';
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + filteredImages.length) % filteredImages.length);
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % filteredImages.length);
   };
 
   return (
@@ -150,11 +190,12 @@ const Gallery: React.FC = () => {
                 onClick={() => {
                   setActiveCategory(category.id);
                   setShowAll(false);
+                  setCurrentIndex(0);
                 }}
-                className={`px-6 py-2.5 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 ${
+                className={`px-6 py-2.5 rounded-full font-semibold transition-all duration-300 transform md:hover:scale-105 ${
                   activeCategory === category.id
                     ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-lg shadow-blue-500/30'
-                    : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-md'
+                    : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 md:hover:bg-gray-50 dark:md:hover:bg-gray-700 shadow-md'
                 }`}
               >
                 {category.name}
@@ -167,62 +208,142 @@ const Gallery: React.FC = () => {
             ))}
           </div>
 
-          {/* Gallery Grid - Single Row with 4 items */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {displayedImages.map((image, index) => (
+          {/* Mobile Slider */}
+          {isMobile ? (
+            <div className="relative">
               <div
-                key={image.id}
-                className="gallery-item group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer bg-white dark:bg-gray-800"
-                onClick={() => handleImageClick(image)}
+                ref={scrollRef}
+                className="overflow-x-hidden scroll-smooth"
               >
-                <div className="relative aspect-square">
-                  <img
-                    src={image.image_url}
-                    alt={image.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300">
-                    <div className="absolute inset-0 flex flex-col justify-end p-6">
-                      <div className="flex items-start justify-between mb-2">
-                        <div className="flex-1">
-                          <h3 className="text-white font-bold text-lg mb-2">
-                            {image.title}
-                          </h3>
-                          <p className="text-gray-200 text-sm mb-3">
-                            {image.description}
-                          </p>
-                          <span className="inline-block px-3 py-1 bg-blue-600 text-white text-xs rounded-full">
-                            {categories.find(c => c.id === image.category)?.name}
-                          </span>
+                <div
+                  className="flex transition-transform duration-500 ease-in-out"
+                  style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                >
+                  {filteredImages.map((image) => (
+                    <div key={image.id} className="w-full flex-shrink-0 px-4">
+                      <div
+                        className="gallery-item group relative overflow-hidden rounded-2xl shadow-lg bg-white dark:bg-gray-800 cursor-pointer"
+                        onClick={() => handleImageClick(image)}
+                      >
+                        <div className="relative aspect-square">
+                          <img
+                            src={image.image_url}
+                            alt={image.title}
+                            className="w-full h-full object-cover transition-all duration-700 filter grayscale hover:grayscale-0"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent">
+                            <div className="absolute inset-0 flex flex-col justify-end p-6">
+                              <h3 className="text-white font-bold text-lg mb-2">
+                                {image.title}
+                              </h3>
+                              <p className="text-gray-200 text-sm mb-3">
+                                {image.description}
+                              </p>
+                              <span className="inline-block px-3 py-1 bg-blue-600 text-white text-xs rounded-full w-fit">
+                                {categories.find(c => c.id === image.category)?.name}
+                              </span>
+                            </div>
+                          </div>
                         </div>
-                        <ZoomIn className="text-white h-6 w-6 ml-4 flex-shrink-0" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Navigation Buttons */}
+              <button
+                onClick={handlePrev}
+                className="absolute left-0 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 p-3 rounded-full shadow-lg z-10 ml-2"
+                aria-label="Previous"
+              >
+                <ChevronLeft className="h-6 w-6 text-gray-700 dark:text-gray-300" />
+              </button>
+              <button
+                onClick={handleNext}
+                className="absolute right-0 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 p-3 rounded-full shadow-lg z-10 mr-2"
+                aria-label="Next"
+              >
+                <ChevronRight className="h-6 w-6 text-gray-700 dark:text-gray-300" />
+              </button>
+
+              {/* Dots Indicator */}
+              <div className="flex justify-center gap-2 mt-6">
+                {filteredImages.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentIndex(index)}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      index === currentIndex
+                        ? 'w-8 bg-blue-600'
+                        : 'w-2 bg-gray-300 dark:bg-gray-600'
+                    }`}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+          ) : (
+            <>
+              {/* Desktop Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {displayedImages.map((image) => (
+                  <div
+                    key={image.id}
+                    className="gallery-item group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer bg-white dark:bg-gray-800"
+                    onClick={() => handleImageClick(image)}
+                  >
+                    <div className="relative aspect-square">
+                      <img
+                        src={image.image_url}
+                        alt={image.title}
+                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300">
+                        <div className="absolute inset-0 flex flex-col justify-end p-6">
+                          <div className="flex items-start justify-between mb-2">
+                            <div className="flex-1">
+                              <h3 className="text-white font-bold text-lg mb-2">
+                                {image.title}
+                              </h3>
+                              <p className="text-gray-200 text-sm mb-3">
+                                {image.description}
+                              </p>
+                              <span className="inline-block px-3 py-1 bg-blue-600 text-white text-xs rounded-full">
+                                {categories.find(c => c.id === image.category)?.name}
+                              </span>
+                            </div>
+                            <ZoomIn className="text-white h-6 w-6 ml-4 flex-shrink-0" />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
 
-          {/* View More Button */}
-          {filteredImages.length > 4 && (
-            <div className="text-center mt-12">
-              <button
-                onClick={() => setShowAll(!showAll)}
-                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-lg font-bold rounded-full hover:from-blue-700 hover:to-cyan-700 transition-all duration-500 transform hover:scale-105 shadow-lg hover:shadow-xl group"
-              >
-                {showAll ? 'Show Less' : `View All ${filteredImages.length} Photos`}
-                <svg
-                  className={`ml-2 h-5 w-5 transition-transform duration-300 ${showAll ? 'rotate-180' : ''}`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-            </div>
+              {/* View More Button */}
+              {filteredImages.length > 4 && (
+                <div className="text-center mt-12">
+                  <button
+                    onClick={() => setShowAll(!showAll)}
+                    className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-lg font-bold rounded-full hover:from-blue-700 hover:to-cyan-700 transition-all duration-500 transform hover:scale-105 shadow-lg hover:shadow-xl group"
+                  >
+                    {showAll ? 'Show Less' : `View All ${filteredImages.length} Photos`}
+                    <svg
+                      className={`ml-2 h-5 w-5 transition-transform duration-300 ${showAll ? 'rotate-180' : ''}`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                </div>
+              )}
+            </>
           )}
 
           {/* Empty State */}

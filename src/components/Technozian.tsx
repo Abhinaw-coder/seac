@@ -61,7 +61,6 @@ const Technozian: React.FC = () => {
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-700"></div>
-        <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -74,22 +73,17 @@ const Technozian: React.FC = () => {
           </div>
 
           <div className="relative inline-block mb-6">
-            <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-black tracking-wider relative techno-title">
-              <span className="relative inline-block">
-                {'TECHNOZIAN'.split('').map((letter, index) => (
-                  <span
-                    key={index}
-                    className="inline-block hover:scale-110 transition-transform duration-300 cursor-default techno-letter"
-                    style={{
-                      animationDelay: `${index * 0.1}s`,
-                    }}
-                  >
-                    {letter}
-                  </span>
-                ))}
-              </span>
+            <h2
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-wide text-gray-900 dark:text-white"
+              style={{
+                fontFamily: "'Bitcount Prop Double Ink', system-ui",
+                fontOpticalSizing: 'auto',
+                fontWeight: 700,
+                fontStyle: 'normal'
+              }}
+            >
+              TECHNOZIAN
             </h2>
-            <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 opacity-30 blur-2xl -z-10 animate-pulse-slow"></div>
           </div>
 
           <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
@@ -147,9 +141,9 @@ const Technozian: React.FC = () => {
                     compete in thrilling challenges, and network with industry leaders.
                   </p>
 
-                  <button className="group/btn flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 rounded-xl font-bold text-white shadow-lg shadow-blue-500/50 transition-all duration-300 transform hover:scale-105">
+                  <button className="group/btn flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 rounded-xl font-bold text-white shadow-lg shadow-blue-500/50 transition-all duration-300 transform md:hover:scale-105">
                     Register Now
-                    <ArrowRight className="h-5 w-5 group-hover/btn:translate-x-1 transition-transform" />
+                    <ArrowRight className="h-5 w-5 md:group-hover/btn:translate-x-1 transition-transform" />
                   </button>
                 </div>
 
@@ -185,10 +179,10 @@ const Technozian: React.FC = () => {
             {technozianEvents.map((event, index) => (
               <div
                 key={event.id}
-                className="group relative bg-white dark:bg-gradient-to-br dark:from-slate-900 dark:to-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 hover:border-cyan-500/50 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/20"
+                className="group relative bg-white dark:bg-gradient-to-br dark:from-slate-900 dark:to-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 hover:border-cyan-500/50 transition-all duration-500 md:transform md:hover:-translate-y-2 md:hover:shadow-2xl md:hover:shadow-cyan-500/20"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/0 to-cyan-600/0 group-hover:from-blue-600/5 group-hover:to-cyan-600/5 rounded-2xl transition-all duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/0 to-cyan-600/0 md:group-hover:from-blue-600/5 md:group-hover:to-cyan-600/5 rounded-2xl transition-all duration-500"></div>
 
                 <div className="relative">
                   <div className="flex items-start justify-between mb-4">
@@ -198,7 +192,7 @@ const Technozian: React.FC = () => {
                     </span>
                   </div>
 
-                  <h4 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
+                  <h4 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 md:group-hover:text-cyan-600 dark:md:group-hover:text-cyan-400 transition-colors">
                     {event.title}
                   </h4>
 
@@ -226,7 +220,7 @@ const Technozian: React.FC = () => {
                       className="text-cyan-600 dark:text-cyan-400 font-semibold hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors flex items-center gap-1 group/arrow"
                     >
                       Learn More
-                      <ArrowRight className="h-4 w-4 group-hover/arrow:translate-x-1 transition-transform" />
+                      <ArrowRight className="h-4 w-4 md:group-hover/arrow:translate-x-1 transition-transform" />
                     </button>
                   </div>
                 </div>
@@ -237,98 +231,9 @@ const Technozian: React.FC = () => {
       </div>
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap');
-
-        @keyframes gradient-x {
-          0%, 100% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-        }
-        .animate-gradient-x {
-          background-size: 200% 200%;
-          animation: gradient-x 3s ease infinite;
-        }
         .delay-700 {
           animation-delay: 700ms;
         }
-        .delay-1000 {
-          animation-delay: 1000ms;
-        }
-        .animate-pulse-slow {
-          animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-
-        .techno-title {
-          font-family: 'Orbitron', monospace;
-          text-transform: uppercase;
-          letter-spacing: 0.15em;
-          background: linear-gradient(
-            45deg,
-            #0ea5e9,
-            #06b6d4,
-            #3b82f6,
-            #06b6d4,
-            #0ea5e9
-          );
-          background-size: 300% 300%;
-          -webkit-background-clip: text;
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
-          animation: techno-glow 3s ease-in-out infinite;
-          text-shadow:
-            0 0 10px rgba(6, 182, 212, 0.5),
-            0 0 20px rgba(14, 165, 233, 0.3),
-            0 0 30px rgba(59, 130, 246, 0.2);
-          filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.8))
-                  drop-shadow(0 0 20px rgba(14, 165, 233, 0.6))
-                  drop-shadow(0 0 30px rgba(59, 130, 246, 0.4));
-        }
-
-        @keyframes techno-glow {
-          0%, 100% {
-            background-position: 0% 50%;
-            filter:
-              drop-shadow(0 0 10px rgba(6, 182, 212, 0.8))
-              drop-shadow(0 0 20px rgba(14, 165, 233, 0.6))
-              drop-shadow(0 0 30px rgba(59, 130, 246, 0.4))
-              brightness(1.2);
-          }
-          50% {
-            background-position: 100% 50%;
-            filter:
-              drop-shadow(0 0 15px rgba(6, 182, 212, 1))
-              drop-shadow(0 0 30px rgba(14, 165, 233, 0.8))
-              drop-shadow(0 0 45px rgba(59, 130, 246, 0.6))
-              brightness(1.5);
-          }
-        }
-
-        .techno-letter {
-          animation: letter-pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes letter-pulse {
-          0%, 100% {
-            transform: translateY(0) scale(1);
-          }
-          50% {
-            transform: translateY(-5px) scale(1.05);
-          }
-        }
-
-        .techno-letter:nth-child(1) { animation-delay: 0s; }
-        .techno-letter:nth-child(2) { animation-delay: 0.1s; }
-        .techno-letter:nth-child(3) { animation-delay: 0.2s; }
-        .techno-letter:nth-child(4) { animation-delay: 0.3s; }
-        .techno-letter:nth-child(5) { animation-delay: 0.4s; }
-        .techno-letter:nth-child(6) { animation-delay: 0.5s; }
-        .techno-letter:nth-child(7) { animation-delay: 0.6s; }
-        .techno-letter:nth-child(8) { animation-delay: 0.7s; }
-        .techno-letter:nth-child(9) { animation-delay: 0.8s; }
-        .techno-letter:nth-child(10) { animation-delay: 0.9s; }
       `}</style>
 
       <EventDetailModal

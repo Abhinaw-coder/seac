@@ -104,37 +104,26 @@ const About: React.FC = () => {
           ))}
         </div>
 
-        {/* Core Values Section - Enhanced */}
-        <div className="relative overflow-hidden rounded-3xl mb-20">
-          {/* Gradient Background with Pattern */}
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-cyan-600 to-blue-700"></div>
-          <div className="absolute inset-0 opacity-10" style={{
-            backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
-            backgroundSize: '40px 40px'
-          }}></div>
-
+        {/* Core Values Section - Simple */}
+        <div className="relative overflow-hidden rounded-3xl mb-20 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
           {/* Content */}
           <div className="relative z-10 p-8 md:p-16">
-            <h3 className="text-3xl md:text-4xl font-bold text-white text-center mb-4">Our Core Values</h3>
-            <p className="text-blue-100 text-center mb-12 max-w-2xl mx-auto text-lg">
+            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white text-center mb-4">Our Core Values</h3>
+            <p className="text-gray-600 dark:text-gray-300 text-center mb-12 max-w-2xl mx-auto text-lg">
               The principles that guide everything we do
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
               {coreValues.map((value, index) => (
                 <div key={index} className="text-center group">
-                  <div className="bg-white/20 backdrop-blur-sm w-20 h-20 rounded-2xl flex items-center justify-center mb-6 mx-auto transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-white/30 shadow-xl">
-                    <value.icon className="h-10 w-10 text-white" />
+                  <div className="bg-blue-100 dark:bg-blue-900/30 w-20 h-20 rounded-2xl flex items-center justify-center mb-6 mx-auto transition-all duration-300 md:group-hover:scale-110 shadow-lg">
+                    <value.icon className="h-10 w-10 text-blue-600 dark:text-blue-400" />
                   </div>
-                  <h4 className="text-2xl font-bold text-white mb-3 group-hover:scale-105 transition-transform duration-300">{value.title}</h4>
-                  <p className="text-blue-50 leading-relaxed text-base">{value.description}</p>
+                  <h4 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 transition-transform duration-300">{value.title}</h4>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-base">{value.description}</p>
                 </div>
               ))}
             </div>
           </div>
-
-          {/* Decorative Elements */}
-          <div className="absolute top-10 right-10 w-32 h-32 bg-white/5 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 left-10 w-40 h-40 bg-cyan-400/10 rounded-full blur-3xl"></div>
         </div>
 
         {/* Team Section

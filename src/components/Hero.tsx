@@ -129,27 +129,27 @@ const Hero: React.FC = () => {
 
         {/* Stats */}
         <div ref={statsRef} className="mt-8 md:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-8 max-w-6xl mx-auto px-4">
-          <div className="stat-card bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-xl md:rounded-2xl p-4 md:p-8 shadow-2xl hover:shadow-cyan-500/20 hover:border-cyan-400/40 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 group">
+          <div className="stat-card bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-xl md:rounded-2xl p-4 md:p-8 shadow-2xl md:hover:shadow-cyan-500/20 md:hover:border-cyan-400/40 transition-all duration-500 md:transform md:hover:scale-105 md:hover:-translate-y-2 group">
             <div
-              className="text-3xl md:text-4xl lg:text-5xl font-black bg-gradient-to-br from-cyan-400 via-blue-400 to-cyan-500 bg-clip-text text-transparent mb-2 md:mb-3 group-hover:scale-110 transition-transform duration-500"
+              className="text-3xl md:text-4xl lg:text-5xl font-black bg-gradient-to-br from-cyan-400 via-blue-400 to-cyan-500 bg-clip-text text-transparent mb-2 md:mb-3 md:group-hover:scale-110 transition-transform duration-500"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
               500+
             </div>
             <div className="text-gray-200 text-sm md:text-base font-semibold" style={{ fontFamily: "'Inter', sans-serif" }}>Active Members</div>
           </div>
-          <div className="stat-card bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-xl md:rounded-2xl p-4 md:p-8 shadow-2xl hover:shadow-blue-500/20 hover:border-blue-400/40 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 group">
+          <div className="stat-card bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-xl md:rounded-2xl p-4 md:p-8 shadow-2xl md:hover:shadow-blue-500/20 md:hover:border-blue-400/40 transition-all duration-500 md:transform md:hover:scale-105 md:hover:-translate-y-2 group">
             <div
-              className="text-3xl md:text-4xl lg:text-5xl font-black bg-gradient-to-br from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2 md:mb-3 group-hover:scale-110 transition-transform duration-500"
+              className="text-3xl md:text-4xl lg:text-5xl font-black bg-gradient-to-br from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2 md:mb-3 md:group-hover:scale-110 transition-transform duration-500"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
               50+
             </div>
             <div className="text-gray-200 text-sm md:text-base font-semibold" style={{ fontFamily: "'Inter', sans-serif" }}>Projects Completed</div>
           </div>
-          <div className="stat-card bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-xl md:rounded-2xl p-4 md:p-8 shadow-2xl hover:shadow-cyan-500/20 hover:border-cyan-400/40 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 group">
+          <div className="stat-card bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-xl md:rounded-2xl p-4 md:p-8 shadow-2xl md:hover:shadow-cyan-500/20 md:hover:border-cyan-400/40 transition-all duration-500 md:transform md:hover:scale-105 md:hover:-translate-y-2 group">
             <div
-              className="text-3xl md:text-4xl lg:text-5xl font-black bg-gradient-to-br from-cyan-400 via-blue-400 to-cyan-500 bg-clip-text text-transparent mb-2 md:mb-3 group-hover:scale-110 transition-transform duration-500"
+              className="text-3xl md:text-4xl lg:text-5xl font-black bg-gradient-to-br from-cyan-400 via-blue-400 to-cyan-500 bg-clip-text text-transparent mb-2 md:mb-3 md:group-hover:scale-110 transition-transform duration-500"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
               15

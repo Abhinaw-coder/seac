@@ -100,33 +100,26 @@ const TeamSection: React.FC = () => {
           </button>
         ) : (
           <div className="animate-fade-in">
-            {/* Mobile Slider */}
+            {/* Mobile Slider - Compact Gallery Style */}
             <div className="md:hidden relative">
-              <div
-                ref={scrollRef}
-                className="overflow-x-hidden scroll-smooth"
-              >
-                <div
-                  className="flex transition-transform duration-500 ease-in-out"
-                  style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-                >
-                  {team.map((m) => (
-                    <div key={m.id} className="w-full flex-shrink-0 px-4">
-                      <ProfileCard
-                        name={m.name}
-                        title={m.title}
-                        handle={m.handle}
-                        status={m.status || 'Online'}
-                        contactText="Contact"
-                        avatarUrl={m.avatarUrl}
-                        showUserInfo={true}
-                        enableTilt={false}
-                        enableMobileTilt={false}
-                        className="shadow-lg"
+              <div className="grid grid-cols-2 gap-4">
+                {team.slice(currentIndex, currentIndex + 2).map((m) => (
+                  <div key={m.id} className="relative">
+                    <div className="aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-blue-100 to-cyan-100 dark:from-blue-900/30 dark:to-cyan-900/30 p-4 border border-gray-200 dark:border-gray-700 shadow-lg flex flex-col items-center justify-center text-center">
+                      <img
+                        src={m.avatarUrl}
+                        alt={m.name}
+                        className="w-20 h-20 rounded-full object-cover mb-3 border-4 border-white dark:border-gray-800 shadow-md"
                       />
+                      <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-1">
+                        {m.name}
+                      </h3>
+                      <p className="text-xs text-gray-600 dark:text-gray-300">
+                        {m.title}
+                      </p>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
 
               {/* Navigation Buttons */}
@@ -135,24 +128,24 @@ const TeamSection: React.FC = () => {
                 className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 bg-white dark:bg-gray-800 p-2 rounded-full shadow-lg z-10"
                 aria-label="Previous"
               >
-                <ChevronLeft className="h-6 w-6 text-gray-700 dark:text-gray-300" />
+                <ChevronLeft className="h-5 w-5 text-gray-700 dark:text-gray-300" />
               </button>
               <button
                 onClick={handleNext}
                 className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 bg-white dark:bg-gray-800 p-2 rounded-full shadow-lg z-10"
                 aria-label="Next"
               >
-                <ChevronRight className="h-6 w-6 text-gray-700 dark:text-gray-300" />
+                <ChevronRight className="h-5 w-5 text-gray-700 dark:text-gray-300" />
               </button>
 
               {/* Dots Indicator */}
               <div className="flex justify-center gap-2 mt-6">
-                {team.map((_, index) => (
+                {Array.from({ length: Math.ceil(team.length / 2) }).map((_, index) => (
                   <button
                     key={index}
-                    onClick={() => setCurrentIndex(index)}
+                    onClick={() => setCurrentIndex(index * 2)}
                     className={`h-2 rounded-full transition-all duration-300 ${
-                      index === currentIndex
+                      Math.floor(currentIndex / 2) === index
                         ? 'w-8 bg-blue-600'
                         : 'w-2 bg-gray-300 dark:bg-gray-600'
                     }`}

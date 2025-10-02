@@ -66,13 +66,13 @@ const Technozian: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full mb-6 shadow-lg shadow-blue-500/50">
-            <Zap className="h-5 w-5 text-yellow-300 animate-pulse" />
-            <span className="text-white font-bold text-sm tracking-wider">THE BIGGEST TECH EVENT</span>
-            <Zap className="h-5 w-5 text-yellow-300 animate-pulse" />
-          </div>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-6">
+            <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full shadow-lg shadow-blue-500/50">
+              <Zap className="h-5 w-5 text-yellow-300 animate-pulse" />
+              <span className="text-white font-bold text-sm tracking-wider">THE BIGGEST TECH EVENT</span>
+              <Zap className="h-5 w-5 text-yellow-300 animate-pulse" />
+            </div>
 
-          <div className="relative inline-block mb-6">
             <h2
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-wide text-gray-900 dark:text-white"
               style={{
@@ -141,10 +141,10 @@ const Technozian: React.FC = () => {
                     compete in thrilling challenges, and network with industry leaders.
                   </p>
 
-                  <button className="group/btn flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 rounded-xl font-bold text-white shadow-lg shadow-blue-500/50 transition-all duration-300 transform md:hover:scale-105">
+                  <a href="#technozian-register" className="group/btn flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 rounded-xl font-bold text-white shadow-lg shadow-blue-500/50 transition-all duration-300 transform md:hover:scale-105">
                     Register Now
                     <ArrowRight className="h-5 w-5 md:group-hover/btn:translate-x-1 transition-transform" />
-                  </button>
+                  </a>
                 </div>
 
                 <div className="relative">

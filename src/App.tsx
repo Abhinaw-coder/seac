@@ -11,6 +11,7 @@ import Activities from './components/Activities';
 import TeamSection from './sections/TeamSection';
 import Events from './components/Events';
 import Technozian from './components/Technozian';
+import TechnozianRegister from './components/TechnozianRegister';
 import Gallery from './components/Gallery';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -62,6 +63,7 @@ function AppContent() {
         <TeamSection />
         <Events />
         <Technozian />
+        <TechnozianRegister />
         <Gallery />
         <Contact />
       </main>
